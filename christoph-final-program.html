@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christoph Schob - Elite Off-Season Program | VLV</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+  
+  :root { 
+    --black: #1A1A1A;
+    --yellow: #F5C842;
+    --gold: #FFD700;
+    --white: #FFFFFF;
+    --gray: #B0B0B0;
+    --dark-gray: #2A2A2A;
+    --border: #3A3A3A;
+    --green: #4CAF50;
+    --red: #FF5722;
+    --blue: #4A90E2;
+    --purple: #9C27B0;
+    --shadow: rgba(0,0,0,0.5);
+    --glow: rgba(245, 200, 66, 0.5);
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(245, 200, 66, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(245, 200, 66, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  #root {
+    position: relative;
+    z-index: 2;
+  }
+  
+  header {
+    background: linear-gradient(135deg, var(--dark-gray) 0%, #1f1f1f 100%);
+    padding: 20px;
+    border-bottom: 3px solid var(--yellow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 10px 30px var(--shadow);
+  }
+  
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .logo-wrapper {
+    flex-shrink: 0;
+  }
+  
+  .logo-wrapper img {
+    width: 180px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    filter: drop-shadow(0 0 25px var(--yellow)) brightness(1.15);
+    animation: logoGlow 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes logoGlow {
+    0% { filter: drop-shadow(0 0 20px var(--yellow)) brightness(1.1); }
+    100% { filter: drop-shadow(0 0 40px var(--gold)) drop-shadow(0 0 60px var(--yellow)) brightness(1.25); }
+  }
+  
+  .athlete-details {
+    border-left: 3px solid var(--yellow);
+    padding-left: 20px;
+    flex: 1;
+  }
+  
+  .athlete-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8em, 5vw, 2.5em);
+    color: var(--yellow);
+    letter-spacing: 2px;
+    text-shadow: 0 0 25px var(--glow);
+  }
+  
+  .athlete-meta {
+    color: var(--gray);
+    font-size: clamp(0.85em, 2.5vw, 1em);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .mobile-dropdown {
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .mobile-dropdown select {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--dark-gray);
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-dropdown { display: block; }
+    .nav-wrapper { display: none !important; }
+  }
+  
+  nav {
+    background: rgba(42, 42, 42, 0.98);
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 93px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+  }
+  
+  .nav-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .nav-wrapper::-webkit-scrollbar { height: 6px; }
+  .nav-wrapper::-webkit-scrollbar-track { background: var(--dark-gray); }
+  .nav-wrapper::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
+  
+  .nav-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    background: var(--dark-gray);
+    color: var(--gray);
+    border: 2px solid var(--border);
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .nav-btn:hover {
+    background: rgba(245, 200, 66, 0.1);
+    border-color: var(--yellow);
+    color: var(--yellow);
+    transform: translateY(-2px);
+  }
+  
+  .nav-btn.active {
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
+    box-shadow: 0 0 20px var(--glow);
+    font-weight: 700;
+  }
+  
+  .content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  
+  .week-overview {
+    background: linear-gradient(135deg, var(--dark-gray) 0%, #1f1f1f 100%);
+    border: 2px solid var(--yellow);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px var(--shadow);
+  }
+  
+  .week-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2em;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px var(--glow);
+  }
+  
+  .week-description {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 1.05em;
+  }
+  
+  .day-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+  
+  .day-tab {
+    font-family: 'Bebas Neue', sans-serif;
+    background: var(--dark-gray);
+    color: var(--gray);
+    border: 2px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    letter-spacing: 1px;
+  }
+  
+  .day-tab:hover {
+    background: rgba(245, 200, 66, 0.1);
+    border-color: var(--yellow);
+    color: var(--yellow);
+    transform: translateY(-2px);
+  }
+  
+  .day-tab.active {
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
+    box-shadow: 0 0 20px var(--glow);
+  }
+  
+  .section-divider {
+    background: linear-gradient(135deg, var(--purple) 0%, #7B1FA2 100%);
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin: 25px 0 20px 0;
+    text-align: center;
+  }
+  
+  .section-divider-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5em;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(156, 39, 176, 0.6);
+  }
+  
+  .workout-card {
+    background: linear-gradient(135deg, var(--dark-gray) 0%, #1f1f1f 100%);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px var(--shadow);
+    transition: all 0.3s ease;
+  }
+  
+  .workout-card:hover {
+    border-color: var(--yellow);
+    box-shadow: 0 8px 30px var(--shadow);
+    transform: translateY(-2px);
+  }
+  
+  .workout-card.warmup {
+    border-color: var(--green);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, var(--dark-gray) 100%);
+  }
+  
+  .workout-card.mobility {
+    border-color: var(--purple);
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, var(--dark-gray) 100%);
+  }
+  
+  .workout-card.conditioning {
+    border-color: var(--red);
+    background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, var(--dark-gray) 100%);
+  }
+  
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .exercise-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4em;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+  
+  .exercise-name a {
+    color: var(--yellow);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .exercise-name a:hover {
+    text-shadow: 0 0 15px var(--glow);
+    color: var(--gold);
+  }
+  
+  .sets-reps {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2em;
+    color: var(--white);
+    background: rgba(245, 200, 66, 0.2);
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--yellow);
+  }
+  
+  .exercise-note {
+    background: rgba(74, 144, 226, 0.15);
+    border-left: 3px solid var(--blue);
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    color: var(--gray);
+    font-size: 0.95em;
+  }
+  
+  .set-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  
+  .set-row:hover {
+    background: rgba(245, 200, 66, 0.05);
+    border-color: var(--yellow);
+  }
+  
+  .set-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1em;
+    color: var(--yellow);
+    min-width: 60px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  
+  .input-label {
+    font-size: 0.75em;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .set-input {
+    padding: 8px 12px;
+    background: var(--dark-gray);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--white);
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .set-input:focus {
+    outline: none;
+    border-color: var(--yellow);
+    box-shadow: 0 0 10px var(--glow);
+  }
+  
+  .set-input::placeholder {
+    color: var(--gray);
+    opacity: 0.6;
+  }
+  
+  .program-info {
+    background: linear-gradient(135deg, var(--dark-gray) 0%, #1f1f1f 100%);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px var(--shadow);
+  }
+  
+  .info-section {
+    margin-bottom: 20px;
+  }
+  
+  .info-section:last-child {
+    margin-bottom: 0;
+  }
+  
+  .info-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8em;
+    color: var(--yellow);
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px var(--glow);
+  }
+  
+  .info-content {
+    color: var(--gray);
+    line-height: 1.8;
+  }
+  
+  .info-content p {
+    margin-bottom: 12px;
+  }
+  
+  .info-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .info-content li {
+    padding: 8px 0 8px 25px;
+    position: relative;
+  }
+  
+  .info-content li::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+    color: var(--yellow);
+  }
+  
+  .info-content strong {
+    color: var(--yellow);
+  }
+  
+  .clear-data-btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .clear-data-btn:hover {
+    background: #E64A19;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 87, 34, 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    .set-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .set-label {
+      text-align: center;
+    }
+    
+    .input-group {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .exercise-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .sets-reps {
+      align-self: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const WORKOUT_DATA = {
+  "Week 1": {
+    description: "Foundation Week - Movement quality & baseline conditioning",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "4x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs" },
+          { name: "DB Romanian Deadlift", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM" },
+          { name: "Bulgarian Split Squat", sets_reps: "3x8/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE" },
+          { name: "Standing Calf Raise", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI" },
+          { name: "Ab Wheel Rollouts", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ" },
+          { name: "Ankle Mobility Rocks", sets_reps: "2x15 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "2x60 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" },
+          { name: "Adductor Rock-backs", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=f1vXGbX6PqQ" }
+        ]
+      },
+      "Tuesday - Upper Push + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "4x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94" },
+          { name: "DB Overhead Press", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0" },
+          { name: "DB Incline Press", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8" },
+          { name: "Cable Tricep Pushdown", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=2-LAMcpzODU" },
+          { name: "DB Lateral Raises", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 8 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Go ALL-OUT on work intervals. This is anaerobic power training."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" },
+          { name: "Doorway Pec Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Active Recovery": {
+        exercises: [
+          { name: "Light Cardio", sets_reps: "20-30 min", url: "#", note: "Bike, row, or walk - Zone 2 heart rate" },
+          { name: "Full Body Dynamic Stretching", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling Full Body", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "World's Greatest Stretch", sets_reps: "2x5 each side", url: "https://www.youtube.com/watch?v=y0wlAjzcjFs" },
+          { name: "Cat-Cow Spine Mobilization", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Deep Breathing + Diaphragm Work", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "4x6-8", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g" },
+          { name: "DB Row", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=pYcpY20QaE8" },
+          { name: "Cable Face Pulls", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=rep-qVOkqgk" },
+          { name: "DB Hammer Curls", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zC3nLlEvin4" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 8 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Match intensity from Tuesday. Consistency is key."
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Thread the Needle", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=Q1eJ6IlKdTk" },
+          { name: "Neck Mobility 4-way", sets_reps: "2x8 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=VJQrecGSBKs" },
+          { name: "Walking DB Lunges", sets_reps: "3x12/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=oBeJW8qENfM" },
+          { name: "Lying Leg Curls", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg" },
+          { name: "Planks", sets_reps: "3x45-60sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Cossack Squats", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=tpczTeSkHz0" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "90 sec each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring Flossing", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Light Skills/Footwork": {
+        exercises: [
+          { name: "Light Footwork Drills", sets_reps: "20 min", url: "#", note: "Ladder drills, cone work - technique focus" },
+          { name: "Hand Fighting Practice", sets_reps: "10 min", url: "#", note: "Shadow work or with partner" },
+          { name: "Easy Walk/Bike", sets_reps: "15 min", url: "#", note: "Very light - Zone 1" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Dynamic Stretching Circuit", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#", note: "Recovery day - focus on nutrition, sleep, and mental reset" }
+        ]
+      }
+    }
+  },
+  "Week 2": {
+    description: "Volume Increase - Add 5-10% from Week 1",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "4x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "5-10 lbs heavier" },
+          { name: "DB Romanian Deadlift", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "Increase weight" },
+          { name: "Bulgarian Split Squat", sets_reps: "3x10/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE", note: "+2 reps" },
+          { name: "Standing Calf Raise", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI", note: "+1 set" },
+          { name: "Ab Wheel Rollouts", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4", note: "+2 reps" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ" },
+          { name: "Ankle Mobility Rocks", sets_reps: "2x15 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "2x60 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" },
+          { name: "Adductor Rock-backs", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=f1vXGbX6PqQ" }
+        ]
+      },
+      "Tuesday - Upper Push + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "4x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94", note: "Heavier" },
+          { name: "DB Overhead Press", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0", note: "+1 set" },
+          { name: "DB Incline Press", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8", note: "+2 reps" },
+          { name: "Cable Tricep Pushdown", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=2-LAMcpzODU", note: "+3 reps" },
+          { name: "DB Lateral Raises", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo", note: "+1 set" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 9 sets per round",
+          rest: "4 min rest between rounds",
+          note: "+1 set from Week 1. Push the pace."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" },
+          { name: "Doorway Pec Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Active Recovery": {
+        exercises: [
+          { name: "Light Cardio", sets_reps: "20-30 min", url: "#", note: "Zone 2 heart rate" },
+          { name: "Full Body Dynamic Stretching", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling Full Body", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "World's Greatest Stretch", sets_reps: "2x5 each side", url: "https://www.youtube.com/watch?v=y0wlAjzcjFs" },
+          { name: "Cat-Cow Spine Mobilization", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Deep Breathing + Diaphragm Work", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "4x6-8", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g", note: "Add weight or reps" },
+          { name: "DB Row", sets_reps: "4x10", url: "https://www.youtube.com/watch?v=pYcpY20QaE8", note: "+2 reps" },
+          { name: "Cable Face Pulls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=rep-qVOkqgk", note: "+1 set" },
+          { name: "DB Hammer Curls", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=zC3nLlEvin4", note: "+3 reps" },
+          { name: "Band Pull-Aparts", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ", note: "+1 set" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 9 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Same as Tuesday. Maintain quality."
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Thread the Needle", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=Q1eJ6IlKdTk" },
+          { name: "Neck Mobility 4-way", sets_reps: "2x8 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "+3 reps" },
+          { name: "Walking DB Lunges", sets_reps: "3x15/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE", note: "+3 reps" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "+1 set" },
+          { name: "Lying Leg Curls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg", note: "+1 set" },
+          { name: "Planks", sets_reps: "3x60sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Cossack Squats", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=tpczTeSkHz0" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "90 sec each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring Flossing", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Light Skills/Footwork": {
+        exercises: [
+          { name: "Light Footwork Drills", sets_reps: "20 min", url: "#" },
+          { name: "Hand Fighting Practice", sets_reps: "10 min", url: "#" },
+          { name: "Easy Walk/Bike", sets_reps: "15 min", url: "#" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Dynamic Stretching Circuit", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#" }
+        ]
+      }
+    }
+  },
+  "Week 3": {
+    description: "Intensity Week - Peak volume",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "5x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "+1 set, heavier" },
+          { name: "DB Romanian Deadlift", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "+1 set" },
+          { name: "Bulgarian Split Squat", sets_reps: "3x10/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE", note: "Heavier" },
+          { name: "Standing Calf Raise", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI" },
+          { name: "Ab Wheel Rollouts", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4", note: "+1 set" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ" },
+          { name: "Ankle Mobility Rocks", sets_reps: "2x15 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "2x60 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" },
+          { name: "Adductor Rock-backs", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=f1vXGbX6PqQ" }
+        ]
+      },
+      "Tuesday - Upper Push + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "5x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94", note: "+1 set, heavier" },
+          { name: "DB Overhead Press", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0", note: "Heavier" },
+          { name: "DB Incline Press", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8", note: "+1 set" },
+          { name: "Cable Tricep Pushdown", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=2-LAMcpzODU", note: "+1 set" },
+          { name: "DB Lateral Raises", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "PEAK VOLUME - 10 sets per round. Mental toughness week."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" },
+          { name: "Doorway Pec Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Active Recovery": {
+        exercises: [
+          { name: "Light Cardio", sets_reps: "20-30 min", url: "#" },
+          { name: "Full Body Dynamic Stretching", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling Full Body", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "World's Greatest Stretch", sets_reps: "2x5 each side", url: "https://www.youtube.com/watch?v=y0wlAjzcjFs" },
+          { name: "Cat-Cow Spine Mobilization", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Deep Breathing + Diaphragm Work", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "5x6-8", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g", note: "+1 set" },
+          { name: "DB Row", sets_reps: "4x10", url: "https://www.youtube.com/watch?v=pYcpY20QaE8", note: "Heavier" },
+          { name: "Cable Face Pulls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=rep-qVOkqgk" },
+          { name: "DB Hammer Curls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=zC3nLlEvin4", note: "+1 set" },
+          { name: "Band Pull-Aparts", sets_reps: "4x25", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ", note: "+5 reps" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "2 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Match Tuesday's intensity. Finish strong."
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Thread the Needle", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=Q1eJ6IlKdTk" },
+          { name: "Neck Mobility 4-way", sets_reps: "2x8 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "5x15", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "+1 set" },
+          { name: "Walking DB Lunges", sets_reps: "4x15/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE", note: "+1 set" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "Heavier" },
+          { name: "Lying Leg Curls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg" },
+          { name: "Planks", sets_reps: "4x60sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c", note: "+1 set" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Cossack Squats", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=tpczTeSkHz0" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "90 sec each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring Flossing", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Light Skills/Footwork": {
+        exercises: [
+          { name: "Light Footwork Drills", sets_reps: "20 min", url: "#" },
+          { name: "Hand Fighting Practice", sets_reps: "10 min", url: "#" },
+          { name: "Easy Walk/Bike", sets_reps: "15 min", url: "#" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Dynamic Stretching Circuit", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#" }
+        ]
+      }
+    }
+  },
+  "Week 4": {
+    description: "Deload Week - 40% volume reduction",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "3x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "Same weight, less volume" },
+          { name: "DB Romanian Deadlift", sets_reps: "2x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM" },
+          { name: "Bulgarian Split Squat", sets_reps: "2x10/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE" },
+          { name: "Standing Calf Raise", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI" },
+          { name: "Ab Wheel Rollouts", sets_reps: "2x12", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "3 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ", note: "Extra time this week" },
+          { name: "Ankle Mobility Rocks", sets_reps: "3x12 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "3x45 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" }
+        ]
+      },
+      "Tuesday - Upper Push + Light Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "3x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94", note: "Same weight" },
+          { name: "DB Overhead Press", sets_reps: "2x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0" },
+          { name: "DB Incline Press", sets_reps: "2x12", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8" },
+          { name: "Cable Tricep Pushdown", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=2-LAMcpzODU" },
+          { name: "DB Lateral Raises", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "1 round x 6 sets only",
+          rest: "No second round",
+          note: "DELOAD - Single round, 60% effort. Recovery focus."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "4x10", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Doorway Pec Stretch", sets_reps: "3 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Extended Recovery": {
+        exercises: [
+          { name: "Light Walk", sets_reps: "30 min", url: "#", note: "Very easy pace" },
+          { name: "Full Body Stretching", sets_reps: "20 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling + Massage", sets_reps: "20 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "Restorative Yoga Flow", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=COp7BR_Dvps" },
+          { name: "Deep Breathing Work", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Light Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "3x6-8", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g" },
+          { name: "DB Row", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=pYcpY20QaE8" },
+          { name: "Cable Face Pulls", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=rep-qVOkqgk" },
+          { name: "DB Hammer Curls", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=zC3nLlEvin4" },
+          { name: "Band Pull-Aparts", sets_reps: "2x25", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "1 round x 6 sets only",
+          rest: "No second round",
+          note: "Match Tuesday - easy recovery session."
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "3 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Neck Mobility 4-way", sets_reps: "3x6 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "3x15", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "Lighter weight" },
+          { name: "Walking DB Lunges", sets_reps: "2x15/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "2x12", url: "https://www.youtube.com/watch?v=oBeJW8qENfM" },
+          { name: "Lying Leg Curls", sets_reps: "2x15", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg" },
+          { name: "Planks", sets_reps: "2x60sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "3 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring PNF Stretching", sets_reps: "3 min each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Extra Recovery": {
+        exercises: [
+          { name: "Easy Walk/Swim", sets_reps: "20 min", url: "#", note: "Very light" },
+          { name: "Sauna/Cold Plunge (optional)", sets_reps: "20 min", url: "#" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Meditation/Breathing", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#", note: "Sleep in. Relax. Prepare for Week 5 push." }
+        ]
+      }
+    }
+  },
+  "Week 5": {
+    description: "Peak Week - Highest intensity",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "5x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "PR ATTEMPT - heaviest weight" },
+          { name: "DB Romanian Deadlift", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "Heavy" },
+          { name: "Bulgarian Split Squat", sets_reps: "4x10/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE" },
+          { name: "Standing Calf Raise", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI", note: "+5 reps" },
+          { name: "Ab Wheel Rollouts", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4", note: "+3 reps" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ" },
+          { name: "Ankle Mobility Rocks", sets_reps: "2x15 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "2x60 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" },
+          { name: "Adductor Rock-backs", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=f1vXGbX6PqQ" }
+        ]
+      },
+      "Tuesday - Upper Push + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "5x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94", note: "PR ATTEMPT" },
+          { name: "DB Overhead Press", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0", note: "Heavy" },
+          { name: "DB Incline Press", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8" },
+          { name: "Cable Tricep Pushdown", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=2-LAMcpzODU" },
+          { name: "DB Lateral Raises", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo", note: "+5 reps" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "3 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Added 3rd round! Maximum volume. Dig deep."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" },
+          { name: "Doorway Pec Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Active Recovery": {
+        exercises: [
+          { name: "Light Cardio", sets_reps: "20-30 min", url: "#" },
+          { name: "Full Body Dynamic Stretching", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling Full Body", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "World's Greatest Stretch", sets_reps: "2x5 each side", url: "https://www.youtube.com/watch?v=y0wlAjzcjFs" },
+          { name: "Cat-Cow Spine Mobilization", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Deep Breathing + Diaphragm Work", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "5x8", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g", note: "PR ATTEMPT" },
+          { name: "DB Row", sets_reps: "4x10", url: "https://www.youtube.com/watch?v=pYcpY20QaE8", note: "Heavy" },
+          { name: "Cable Face Pulls", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=rep-qVOkqgk", note: "+5 reps" },
+          { name: "DB Hammer Curls", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=zC3nLlEvin4" },
+          { name: "Band Pull-Aparts", sets_reps: "4x30", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ", note: "+5 reps" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 30 sec REST",
+          sets: "3 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "Match Tuesday. Mental warfare. You got this."
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Thread the Needle", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=Q1eJ6IlKdTk" },
+          { name: "Neck Mobility 4-way", sets_reps: "2x8 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "5x15", url: "https://www.youtube.com/watch?v=VJQrecGSBKs" },
+          { name: "Walking DB Lunges", sets_reps: "4x20/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE", note: "+5 reps" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "+3 reps" },
+          { name: "Lying Leg Curls", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg", note: "+5 reps" },
+          { name: "Planks", sets_reps: "4x75sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c", note: "+15 sec" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Cossack Squats", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=tpczTeSkHz0" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "90 sec each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring Flossing", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Light Skills/Footwork": {
+        exercises: [
+          { name: "Light Footwork Drills", sets_reps: "20 min", url: "#" },
+          { name: "Hand Fighting Practice", sets_reps: "10 min", url: "#" },
+          { name: "Easy Walk/Bike", sets_reps: "15 min", url: "#" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Dynamic Stretching Circuit", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#" }
+        ]
+      }
+    }
+  },
+  "Week 6": {
+    description: "Test Week - Program culmination",
+    days: {
+      "Monday - Lower Power": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Front Squat", sets_reps: "5x5", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "FINAL PR - go heavy!" },
+          { name: "DB Romanian Deadlift", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=oBeJW8qENfM" },
+          { name: "Bulgarian Split Squat", sets_reps: "4x12/leg", url: "https://www.youtube.com/watch?v=2C-uNgKwPLE", note: "+2 reps" },
+          { name: "Standing Calf Raise", sets_reps: "5x20", url: "https://www.youtube.com/watch?v=gwLzBJYoWlI", note: "+1 set" },
+          { name: "Ab Wheel Rollouts", sets_reps: "5x15", url: "https://www.youtube.com/watch?v=EXm5BR7m6m4", note: "+1 set" }
+        ],
+        mobility: [
+          { name: "90/90 Hip Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=xLb7Rd3gJPQ" },
+          { name: "Ankle Mobility Rocks", sets_reps: "2x15 each", url: "https://www.youtube.com/watch?v=ZFwIEKHF2b0" },
+          { name: "Deep Squat Hold", sets_reps: "2x60 sec", url: "https://www.youtube.com/watch?v=Lq_DUr-AcEs" },
+          { name: "Adductor Rock-backs", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=f1vXGbX6PqQ" }
+        ]
+      },
+      "Tuesday - Upper Push + Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Bench Press", sets_reps: "5x6", url: "https://www.youtube.com/watch?v=VmB1G1K7v94", note: "FINAL PR" },
+          { name: "DB Overhead Press", sets_reps: "4x8", url: "https://www.youtube.com/watch?v=-ST0C2cOmT0" },
+          { name: "DB Incline Press", sets_reps: "4x15", url: "https://www.youtube.com/watch?v=8iPEnn-ltC8", note: "+3 reps" },
+          { name: "Cable Tricep Pushdown", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=2-LAMcpzODU", note: "+5 reps" },
+          { name: "DB Lateral Raises", sets_reps: "5x20", url: "https://www.youtube.com/watch?v=3VcKaXpzqRo", note: "+1 set" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 25 sec REST (!!)",
+          sets: "3 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "FINAL TEST - Shortened rest to 25 sec = HARDER! This is it. Leave nothing in the tank."
+        },
+        mobility: [
+          { name: "Wall Slides", sets_reps: "3x12", url: "https://www.youtube.com/watch?v=zFNRRxvg6f8" },
+          { name: "Band Pull-Aparts", sets_reps: "3x20", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ" },
+          { name: "Doorway Pec Stretch", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" },
+          { name: "Thoracic Extensions on Foam Roller", sets_reps: "3x8", url: "https://www.youtube.com/watch?v=oV-8LvqOSV4" }
+        ]
+      },
+      "Wednesday - Active Recovery": {
+        exercises: [
+          { name: "Light Cardio", sets_reps: "20-30 min", url: "#" },
+          { name: "Full Body Dynamic Stretching", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=FSSDLDhbacc" },
+          { name: "Foam Rolling Full Body", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=wN5rapDuYl0" }
+        ],
+        mobility: [
+          { name: "World's Greatest Stretch", sets_reps: "2x5 each side", url: "https://www.youtube.com/watch?v=y0wlAjzcjFs" },
+          { name: "Cat-Cow Spine Mobilization", sets_reps: "3x10", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Deep Breathing + Diaphragm Work", sets_reps: "5 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Thursday - Upper Pull + Final Conditioning": {
+        warmup: { name: "Upper Body Warmup", url: "https://youtu.be/oT3TC0wZ9VY", sets_reps: "Complete all" },
+        exercises: [
+          { name: "Pull-ups", sets_reps: "5x10", url: "https://www.youtube.com/watch?v=eGo4IYlbE5g", note: "FINAL PR - +2 reps" },
+          { name: "DB Row", sets_reps: "4x12", url: "https://www.youtube.com/watch?v=pYcpY20QaE8", note: "+2 reps" },
+          { name: "Cable Face Pulls", sets_reps: "5x20", url: "https://www.youtube.com/watch?v=rep-qVOkqgk", note: "+1 set" },
+          { name: "DB Hammer Curls", sets_reps: "4x20", url: "https://www.youtube.com/watch?v=zC3nLlEvin4", note: "+5 reps" },
+          { name: "Band Pull-Aparts", sets_reps: "5x30", url: "https://www.youtube.com/watch?v=EyCZPJdHfQQ", note: "+1 set" }
+        ],
+        conditioning: {
+          name: "Choose ONE: Bike Sprints / Sled Push / Hill Sprints",
+          protocol: "10 sec WORK : 25 sec REST (!!)",
+          sets: "3 rounds x 10 sets per round",
+          rest: "4 min rest between rounds",
+          note: "FINAL TEST - Match Tuesday. You've earned this. FINISH STRONG!"
+        },
+        mobility: [
+          { name: "Lat Stretches", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=kqnua4rHVVA" },
+          { name: "Scapular CARs", sets_reps: "2x10", url: "https://www.youtube.com/watch?v=jZ5hBVQ3oi8" },
+          { name: "Thread the Needle", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=Q1eJ6IlKdTk" },
+          { name: "Neck Mobility 4-way", sets_reps: "2x8 each direction", url: "https://www.youtube.com/watch?v=8AhfOEE3HBw" }
+        ]
+      },
+      "Friday - Lower Hypertrophy": {
+        warmup: { name: "Lower Body Warmup", url: "https://youtu.be/9n7NwYSX1lI", sets_reps: "Complete all" },
+        exercises: [
+          { name: "DB Goblet Squat", sets_reps: "5x20", url: "https://www.youtube.com/watch?v=VJQrecGSBKs", note: "+5 reps - PUSH IT!" },
+          { name: "Walking DB Lunges", sets_reps: "5x20/leg", url: "https://www.youtube.com/watch?v=D7KaRcUTQeE", note: "+1 set" },
+          { name: "DB Stiff-Leg Deadlift", sets_reps: "5x15", url: "https://www.youtube.com/watch?v=oBeJW8qENfM", note: "+1 set" },
+          { name: "Lying Leg Curls", sets_reps: "5x20", url: "https://www.youtube.com/watch?v=ELOCsoDSmrg", note: "+1 set" },
+          { name: "Planks", sets_reps: "5x90sec", url: "https://www.youtube.com/watch?v=ASdvN_XEl_c", note: "+1 set, +15 sec" }
+        ],
+        mobility: [
+          { name: "Pigeon Pose", sets_reps: "2 min each side", url: "https://www.youtube.com/watch?v=0_zQuiqpFpw" },
+          { name: "Cossack Squats", sets_reps: "2x8 each", url: "https://www.youtube.com/watch?v=tpczTeSkHz0" },
+          { name: "Hip Flexor Couch Stretch", sets_reps: "90 sec each side", url: "https://www.youtube.com/watch?v=D-TZ-YP1UA8" },
+          { name: "Hamstring Flossing", sets_reps: "2x10 each", url: "https://www.youtube.com/watch?v=7MLWS0vmWxc" }
+        ]
+      },
+      "Saturday - Program Celebration": {
+        exercises: [
+          { name: "Light Skills/Drills", sets_reps: "15 min", url: "#", note: "Easy, fun session" },
+          { name: "Walk/Bike", sets_reps: "20 min", url: "#", note: "Celebrate your work!" }
+        ],
+        mobility: [
+          { name: "Full Body Flow", sets_reps: "15 min", url: "https://www.youtube.com/watch?v=i2sRLYWUb38" },
+          { name: "Gratitude Meditation", sets_reps: "10 min", url: "https://www.youtube.com/watch?v=nC5HxUMo4Y8" }
+        ]
+      },
+      "Sunday - Complete Rest": {
+        exercises: [
+          { name: "Complete Rest", sets_reps: "—", url: "#", note: "PROGRAM COMPLETE! Assess gains and plan next phase. You crushed it." }
+        ]
+      }
+    }
+  }
+};
+
+const PROGRAM_INFO = {
+  overview: {
+    title: "📖 Program Overview",
+    content: "6-week elite off-season program for offensive linemen. All exercises adapted for dumbbells, kettlebells, cables, and bands - <strong>NO barbell required</strong>. Progressive overload with strategic Week 4 deload. Anaerobic conditioning twice weekly on upper days."
+  },
+  conditioning: {
+    title: "🔥 Anaerobic Conditioning Protocol (Tuesday & Thursday)",
+    content: [
+      "<strong>WHEN:</strong> After upper body lifting (Tuesday & Thursday)",
+      "<strong>Choose ONE method per session:</strong> Bike Sprints, Sled Push, or Hill Sprints",
+      "<strong>Work Interval:</strong> 10 seconds ALL-OUT maximum effort",
+      "<strong>Rest Interval:</strong> 30 seconds (Weeks 1-5), 25 seconds (Week 6 final test)",
+      "<strong>Sets per Round:</strong> Week 1-2 (8-9), Week 3 (10 peak), Week 4 (6 deload), Week 5-6 (10)",
+      "<strong>Inter-Round Rest:</strong> 4 minutes complete rest between rounds",
+      "<strong>Total Rounds:</strong> Week 1-3 (2 rounds), Week 4 (1 round deload), Week 5-6 (3 rounds)",
+      "<strong>Effort Level:</strong> 95-100% intensity on work intervals - this builds anaerobic power for explosive plays",
+      "<strong>Recovery:</strong> 10 min cool-down walk after completion"
+    ]
+  },
+  warmup: {
+    title: "🔥 Warmup Protocol",
+    content: [
+      "<strong>MANDATORY before every workout</strong> - Never skip warmups",
+      "<strong>Lower Days:</strong> Complete lower body warmup routine (link provided in workout)",
+      "<strong>Upper Days:</strong> Complete upper body warmup routine (link provided in workout)",
+      "<strong>Duration:</strong> 8-12 minutes total",
+      "<strong>Focus:</strong> Movement prep, joint mobility, muscle activation, CNS priming",
+      "<strong>Intensity:</strong> Gradually increase from 40% to 70% effort by end of warmup"
+    ]
+  },
+  mobility: {
+    title: "🧘 Daily Mobility Protocol (10 Minutes)",
+    content: [
+      "<strong>SEPARATE from lifting</strong> - Do this at a different time of day if possible",
+      "<strong>Best Times:</strong> Morning upon waking, before bed, or 3+ hours after training",
+      "<strong>Purpose:</strong> Joint health, injury prevention, movement quality, recovery enhancement",
+      "<strong>Lower Body Focus:</strong> Hips (90/90, pigeon), ankles, adductors, hamstrings, hip flexors",
+      "<strong>Upper Body Focus:</strong> Thoracic spine, shoulders, lats, neck, scapular movement",
+      "<strong>Core Principles:</strong> Controlled breathing, pain-free ranges, hold stretches 60-120 sec",
+      "<strong>Progression:</strong> Increase range of motion weekly, add CARs (Controlled Articular Rotations)",
+      "<strong>Recovery Days:</strong> Extra 5-10 minutes on Wednesday and Sunday",
+      "<strong>Key Areas for Linemen:</strong> Hip internal/external rotation, ankle dorsiflexion, thoracic extension"
+    ]
+  },
+  rpe: {
+    title: "📊 RPE Scale (Rate of Perceived Exertion)",
+    content: [
+      "<strong>1-3:</strong> Very light, warmup weight - could do 15+ more reps",
+      "<strong>4-5:</strong> Light to moderate - could do 8-10 more reps",
+      "<strong>6-7:</strong> Moderate to hard - could do 3-4 more reps - working sets start here",
+      "<strong>8:</strong> Hard - could do 2 more reps - most working sets should be here",
+      "<strong>9:</strong> Very hard - could do 1 more rep with good form - PR attempts",
+      "<strong>10:</strong> Maximum effort - cannot do another rep - rarely used, only true maxes",
+      "<strong>Conditioning:</strong> 95-100% effort on work intervals (feels like RPE 9-10)"
+    ]
+  },
+  progression: {
+    title: "📈 Weekly Progression Strategy",
+    content: [
+      "<strong>Week 1:</strong> Foundation - establish baselines, learn movements, 2 rounds x 8 sets conditioning",
+      "<strong>Week 2:</strong> Volume up 5-10% - add sets/reps, 2 rounds x 9 sets conditioning",
+      "<strong>Week 3:</strong> Peak volume - highest total workload, 2 rounds x 10 sets conditioning",
+      "<strong>Week 4:</strong> Deload - 40% volume reduction, 1 round x 6 sets conditioning (recovery focus)",
+      "<strong>Week 5:</strong> Peak intensity - PR attempts on main lifts, 3 rounds x 10 sets conditioning",
+      "<strong>Week 6:</strong> Test week - final PRs, 3 rounds x 10 sets with 25 sec rest (hardest conditioning)",
+      "<strong>Weight Increases:</strong> 5-10 lbs per week on main lifts, 2.5-5 lbs on accessories",
+      "<strong>Auto-Regulation:</strong> If RPE exceeds 9 consistently, maintain weight rather than increase"
+    ]
+  },
+  nutrition: {
+    title: "🍗 Detailed Nutrition Programming",
+    content: [
+      "<strong>Daily Protein Target:</strong> 1g per lb bodyweight minimum (e.g., 280 lbs = 280g protein)",
+      "<strong>Protein Distribution:</strong> Spread across 4-6 meals (40-50g per meal)",
+      "<strong>Best Protein Sources:</strong> Lean beef, chicken breast, salmon, eggs, Greek yogurt, whey protein",
+      "",
+      "<strong>TRAINING DAY CARBS:</strong> 2.5-3g per lb bodyweight",
+      "• Breakfast (pre-training): 80-100g carbs (oats, fruit, toast)",
+      "• Pre-Workout (90 min before): 60-80g carbs + 40g protein (rice, chicken, sweet potato)",
+      "• Intra-Workout (optional): 30-40g simple carbs if training >75 min",
+      "• Post-Workout (within 60 min): 80-100g carbs + 40g protein (white rice, pasta, lean meat)",
+      "• Remaining meals: 50-70g carbs each (focus on whole grains, vegetables)",
+      "",
+      "<strong>REST DAY CARBS:</strong> 1.5-2g per lb bodyweight",
+      "• Lower carbs at breakfast and dinner",
+      "• Maintain protein at same level",
+      "• Increase healthy fats slightly to maintain calories",
+      "",
+      "<strong>FATS:</strong> 0.4-0.5g per lb bodyweight daily",
+      "• Sources: Avocado, olive oil, nuts, fatty fish, egg yolks",
+      "• Include in every meal for hormone production",
+      "• Don't go below 0.3g/lb even when cutting",
+      "",
+      "<strong>HYDRATION PROTOCOL:</strong>",
+      "• Base: 1 gallon (3.8L) minimum daily",
+      "• Add 16-20 oz per hour of training",
+      "• Morning: 24 oz upon waking with pinch of sea salt",
+      "• During training: 8-12 oz every 15 min",
+      "• Electrolytes: Add to water on training days (sodium, potassium, magnesium)",
+      "",
+      "<strong>MEAL TIMING:</strong>",
+      "• Meal 1 (7:00 AM): 50g protein, 80g carbs, 20g fat",
+      "• Meal 2 (10:30 AM): 45g protein, 60g carbs, 15g fat",
+      "• Meal 3 (1:30 PM - Pre-Training): 40g protein, 70g carbs, 15g fat",
+      "• Training (3:00-4:30 PM)",
+      "• Meal 4 (5:00 PM - Post-Training): 50g protein, 100g carbs, 10g fat",
+      "• Meal 5 (8:00 PM): 45g protein, 40g carbs, 25g fat",
+      "• Optional Meal 6 (Before bed): 30g casein protein, 10g fat",
+      "",
+      "<strong>SUPPLEMENT STACK:</strong>",
+      "• Creatine Monohydrate: 5g daily (any time)",
+      "• Whey Protein: Post-workout and between meals as needed",
+      "• Vitamin D3: 5,000 IU daily (with fat-containing meal)",
+      "• Fish Oil: 2-3g EPA/DHA daily",
+      "• Magnesium: 400mg before bed (recovery and sleep)",
+      "• Multivitamin: With breakfast",
+      "• Optional: Beta-Alanine 3-5g (training days), Caffeine 200-400mg (pre-training)",
+      "",
+      "<strong>GAME DAY NUTRITION (Saturday):</strong>",
+      "• 3h pre-kickoff: Complex carbs + 30g protein (rice bowl + lean meat)",
+      "• 1h pre-kickoff: 20g whey + simple carbs (banana + honey)",
+      "• Halftime: Electrolytes + 15g amino acids",
+      "• Post-game (within 30-60 min): 40g protein + 80-100g carbs",
+      "• Creatine: 5g AM + 25g 3h pre-kickoff",
+      "• Total hydration: 5-6L + replace 150% of sweat loss"
+    ]
+  },
+  recovery: {
+    title: "😴 Comprehensive Recovery Protocols",
+    content: [
+      "<strong>SLEEP (Top Priority):</strong>",
+      "• Target: 8-9 hours nightly minimum",
+      "• Consistency: Same bedtime/wake time daily (±30 min)",
+      "• Environment: Dark (blackout curtains), cool (65-68°F), quiet",
+      "• Pre-bed routine: No screens 60 min before, magnesium supplement, light stretching",
+      "• Track: Use sleep app or ring to monitor quality",
+      "• Naps: 20-30 min power nap OK if needed (not after 3 PM)",
+      "",
+      "<strong>ACTIVE RECOVERY (Wednesday):</strong>",
+      "• Mandatory light cardio 20-30 min (Zone 2 heart rate: 120-140 bpm)",
+      "• Options: Bike, row, swim, walk - NO running or high impact",
+      "• Full body dynamic stretching 15 min",
+      "• Foam rolling 15 min (quads, hamstrings, glutes, lats, calves)",
+      "• Purpose: Increase blood flow, clear metabolic waste, reduce soreness",
+      "",
+      "<strong>COMPLETE REST (Sunday):</strong>",
+      "• Zero training - body needs full shutdown to adapt",
+      "• Light walk OK (≤20 min, easy pace)",
+      "• Focus on nutrition, hydration, sleep, mental recovery",
+      "• Review week, plan ahead, visualize success",
+      "",
+      "<strong>DAILY MOBILITY:</strong>",
+      "• 10 minutes separate from training (morning or evening)",
+      "• Focus areas: Hips, ankles, shoulders, thoracic spine, neck",
+      "• Lineman-specific: Hip IR/ER, ankle DF, hip flexor length",
+      "• Hold stretches 60-120 sec, breathe deeply",
+      "",
+      "<strong>FOAM ROLLING PROTOCOL:</strong>",
+      "• Daily: 5-10 min before bed on training days",
+      "• Wednesday: 15 min full body session",
+      "• Priority areas: IT band, quads, adductors, hamstrings, glutes, lats, calves",
+      "• Technique: Slow rolls (1 inch per second), pause on tender spots 30-60 sec",
+      "• Avoid: Rolling directly on joints, spine, neck",
+      "",
+      "<strong>CONTRAST THERAPY (Optional but Recommended):</strong>",
+      "• Ice Bath: 10-15 min at 50-60°F after intense sessions",
+      "• Contrast Shower: 2 min hot / 1 min cold x 3-4 rounds",
+      "• Sauna: 15-20 min at 170-190°F (2-3x per week)",
+      "• Best timing: Within 2 hours post-training",
+      "• Benefits: Reduced inflammation, improved circulation, mental resilience",
+      "",
+      "<strong>STRESS MANAGEMENT:</strong>",
+      "• Deep breathing: 5-10 min daily (box breathing: 4-4-4-4)",
+      "• Meditation/mindfulness: 10 min before bed",
+      "• Limit stressors: Manage workload, relationships, screen time",
+      "• Track HRV (Heart Rate Variability) if possible - indicates recovery status",
+      "",
+      "<strong>DELOAD WEEK (Week 4):</strong>",
+      "• Critical for long-term progress - DO NOT SKIP",
+      "• 40% reduction in training volume",
+      "• Conditioning reduced to single rounds",
+      "• Extra mobility and recovery work",
+      "• Sleep 9-10 hours if possible",
+      "• Purpose: Allow nervous system and tissues to fully recover before peak weeks"
+    ]
+  },
+  tracking: {
+    title: "📝 Progress Tracking & Metrics",
+    content: [
+      "<strong>1. Workout Logging:</strong> Track weight and RPE for every set in this app",
+      "<strong>2. Weekly Weigh-Ins:</strong> Same day/time (Monday AM, post-bathroom, pre-food)",
+      "<strong>3. Energy Levels:</strong> Rate 1-10 before each training session",
+      "<strong>4. Soreness Tracking:</strong> Note areas of concern, monitor patterns",
+      "<strong>5. Sleep Quality:</strong> Hours + subjective quality (1-10 scale)",
+      "<strong>6. Progress Photos:</strong> Every 2 weeks (same lighting/angle/time)",
+      "<strong>7. Strength PRs:</strong> Test main lifts at start and end of program",
+      "<strong>8. Conditioning Times:</strong> Track completion of anaerobic rounds",
+      "<strong>9. Mobility Progress:</strong> ROM improvements in key movements",
+      "<strong>10. Technical Notes:</strong> Form cues, exercise feel, adjustments needed"
+    ]
+  }
+};
+
+function App() {
+  const [activeWeek, setActiveWeek] = useState("Week 1");
+  const [activeDay, setActiveDay] = useState(null);
+  const [workoutData, setWorkoutData] = useState(() => {
+    const saved = localStorage.getItem('christoph-workout-data');
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  useEffect(() => {
+    if (activeWeek && !activeDay) {
+      const days = Object.keys(WORKOUT_DATA[activeWeek]?.days || {});
+      if (days.length > 0) {
+        setActiveDay(days[0]);
+      }
+    }
+  }, [activeWeek]);
+
+  useEffect(() => {
+    localStorage.setItem('christoph-workout-data', JSON.stringify(workoutData));
+  }, [workoutData]);
+
+  const handleSetData = (week, day, exerciseIndex, setIndex, field, value) => {
+    setWorkoutData(prev => {
+      const newData = { ...prev };
+      if (!newData[week]) newData[week] = {};
+      if (!newData[week][day]) newData[week][day] = {};
+      if (!newData[week][day][exerciseIndex]) newData[week][day][exerciseIndex] = {};
+      if (!newData[week][day][exerciseIndex][setIndex]) newData[week][day][exerciseIndex][setIndex] = {};
+      newData[week][day][exerciseIndex][setIndex][field] = value;
+      return newData;
+    });
+  };
+
+  const clearAllData = () => {
+    if (window.confirm('Clear all workout data? This cannot be undone.')) {
+      setWorkoutData({});
+      localStorage.removeItem('christoph-workout-data');
+      alert('All workout data cleared!');
+    }
+  };
+
+  const parseSetsReps = (setsReps) => {
+    const match = setsReps.match(/^(\d+)x/);
+    if (match) return parseInt(match[1]);
+    return 3;
+  };
+
+  const weeks = Object.keys(WORKOUT_DATA);
+  const currentWeekData = WORKOUT_DATA[activeWeek];
+  const days = currentWeekData ? Object.keys(currentWeekData.days) : [];
+
+  return (
+    <>
+      <header>
+        <div className="header-content">
+          <div className="logo-wrapper">
+            <img src="https://raw.githubusercontent.com/jaredveldh/jaredveldh.github.io/main/vlvl16x9.png" alt="VLV Logo" />
+          </div>
+          <div className="athlete-details">
+            <div className="athlete-name">Christoph Schob</div>
+            <div className="athlete-meta">Elite Off-Season Program | 6 Weeks | VLV</div>
+          </div>
+          <div className="mobile-dropdown">
+            <select value={activeWeek} onChange={(e) => {
+              setActiveWeek(e.target.value);
+              setActiveDay(null);
+            }}>
+              {weeks.map(week => (
+                <option key={week} value={week}>{week}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <nav>
+        <div className="nav-wrapper">
+          {weeks.map(week => (
+            <button
+              key={week}
+              className={`nav-btn ${activeWeek === week ? 'active' : ''}`}
+              onClick={() => {
+                setActiveWeek(week);
+                setActiveDay(null);
+              }}
+            >
+              {week}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="content-container">
+        {activeWeek === "Week 1" && !activeDay && (
+          <div className="week-overview">
+            <h2 className="week-title">Welcome to Your Elite Off-Season Program</h2>
+            <div className="week-description">
+              <p>6-week comprehensive program with strength training, anaerobic conditioning (Tues/Thurs), and daily mobility work. All exercises use dumbbells, kettlebells, cables, and bands.</p>
+              <p style={{marginTop: '15px'}}><strong>Daily Structure:</strong> Warmup → Lift → Conditioning (Tues/Thurs only) → Mobility (separate session)</p>
+              <p style={{marginTop: '15px', color: 'var(--yellow)'}}>💡 <strong>Key:</strong> Never skip warmups. Do mobility work at a different time. Track everything in this app.</p>
+            </div>
+          </div>
+        )}
+
+        {currentWeekData && (
+          <>
+            <div className="day-tabs">
+              {days.map(day => (
+                <button key={day} className={`day-tab ${activeDay === day ? 'active' : ''}`} onClick={() => setActiveDay(day)}>
+                  {day}
+                </button>
+              ))}
+              <button className={`day-tab ${activeDay === 'Program Info' ? 'active' : ''}`} onClick={() => setActiveDay('Program Info')}>
+                📋 Program Info
+              </button>
+            </div>
+
+            {activeDay && activeDay !== 'Program Info' && currentWeekData.days[activeDay] && (
+              <div>
+                {currentWeekData.days[activeDay].warmup && (
+                  <>
+                    <div className="section-divider">
+                      <div className="section-divider-title">🔥 Warmup (Do First!)</div>
+                    </div>
+                    <div className="workout-card warmup">
+                      <div className="exercise-header">
+                        <div className="exercise-name">
+                          <a href={currentWeekData.days[activeDay].warmup.url} target="_blank" rel="noopener noreferrer">
+                            {currentWeekData.days[activeDay].warmup.name}
+                          </a>
+                        </div>
+                        <div className="sets-reps">{currentWeekData.days[activeDay].warmup.sets_reps}</div>
+                      </div>
+                      <div className="exercise-note">
+                        ✅ Complete this warmup routine before starting your main workout
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {currentWeekData.days[activeDay].exercises && (
+                  <>
+                    <div className="section-divider">
+                      <div className="section-divider-title">💪 Main Workout</div>
+                    </div>
+                    {currentWeekData.days[activeDay].exercises.map((exercise, exerciseIndex) => {
+                      const numSets = parseSetsReps(exercise.sets_reps);
+                      return (
+                        <div key={exerciseIndex} className="workout-card">
+                          <div className="exercise-header">
+                            <div className="exercise-name">
+                              <a href={exercise.url} target="_blank" rel="noopener noreferrer">{exercise.name}</a>
+                            </div>
+                            <div className="sets-reps">{exercise.sets_reps}</div>
+                          </div>
+                          {exercise.note && <div className="exercise-note">💡 {exercise.note}</div>}
+                          <div className="set-tracker">
+                            {[...Array(numSets)].map((_, setIndex) => {
+                              const savedData = workoutData[activeWeek]?.[activeDay]?.[exerciseIndex]?.[setIndex] || {};
+                              return (
+                                <div key={setIndex} className="set-row">
+                                  <div className="set-label">Set {setIndex + 1}</div>
+                                  <div className="input-group">
+                                    <label className="input-label">Weight (kg/lb)</label>
+                                    <input type="text" className="set-input" placeholder="e.g., 60kg" value={savedData.weight || ''} onChange={(e) => handleSetData(activeWeek, activeDay, exerciseIndex, setIndex, 'weight', e.target.value)} />
+                                  </div>
+                                  <div className="input-group">
+                                    <label className="input-label">RPE (1-10)</label>
+                                    <input type="number" className="set-input" placeholder="7" min="1" max="10" value={savedData.rpe || ''} onChange={(e) => handleSetData(activeWeek, activeDay, exerciseIndex, setIndex, 'rpe', e.target.value)} />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </>
+                )}
+
+                {currentWeekData.days[activeDay].conditioning && (
+                  <>
+                    <div className="section-divider">
+                      <div className="section-divider-title">🔥 Anaerobic Conditioning</div>
+                    </div>
+                    <div className="workout-card conditioning">
+                      <div className="exercise-header">
+                        <div className="exercise-name">{currentWeekData.days[activeDay].conditioning.name}</div>
+                      </div>
+                      <div className="exercise-note">
+                        <strong>Protocol:</strong> {currentWeekData.days[activeDay].conditioning.protocol}<br/>
+                        <strong>Sets:</strong> {currentWeekData.days[activeDay].conditioning.sets}<br/>
+                        <strong>Rest Between Rounds:</strong> {currentWeekData.days[activeDay].conditioning.rest}<br/>
+                        <strong>Note:</strong> {currentWeekData.days[activeDay].conditioning.note}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {currentWeekData.days[activeDay].mobility && (
+                  <>
+                    <div className="section-divider">
+                      <div className="section-divider-title">🧘 Daily Mobility (Separate Session)</div>
+                    </div>
+                    {currentWeekData.days[activeDay].mobility.map((exercise, idx) => (
+                      <div key={idx} className="workout-card mobility">
+                        <div className="exercise-header">
+                          <div className="exercise-name">
+                            <a href={exercise.url} target="_blank" rel="noopener noreferrer">{exercise.name}</a>
+                          </div>
+                          <div className="sets-reps">{exercise.sets_reps}</div>
+                        </div>
+                        {exercise.note && <div className="exercise-note">💡 {exercise.note}</div>}
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+
+            {activeDay === 'Program Info' && (
+              <div>
+                {Object.entries(PROGRAM_INFO).map(([key, section]) => (
+                  <div key={key} className="program-info">
+                    <div className="info-section">
+                      <h3 className="info-title">{section.title}</h3>
+                      <div className="info-content">
+                        {Array.isArray(section.content) ? (
+                          <ul>{section.content.map((item, i) => (<li key={i} dangerouslySetInnerHTML={{__html: item}} />))}</ul>
+                        ) : (
+                          <p dangerouslySetInnerHTML={{__html: section.content}} />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div className="program-info">
+                  <div className="info-section">
+                    <h3 className="info-title">⚙️ Data Management</h3>
+                    <div className="info-content">
+                      <p>Your workout data saves automatically to your device.</p>
+                      <button className="clear-data-btn" onClick={clearAllData}>🗑️ Clear All Workout Data</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
